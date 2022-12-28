@@ -16,6 +16,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    console.log('pierwszy interceptor', request);
     const clone = request.clone({
       url: `${this.URL}${request.url}`,
     });

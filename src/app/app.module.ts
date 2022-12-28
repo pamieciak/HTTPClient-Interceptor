@@ -19,6 +19,16 @@ import { CustomHttpInterceptor } from './http.interceptor';
       useClass: CustomHttpInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: {
+        intercept(request: any, next: any) {
+          console.log('dodatkowy interceptor')
+          return next.handle(request);
+        },
+      },
+      multi: true
+    },
   ],
 })
 export class AppModule {}
