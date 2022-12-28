@@ -33,26 +33,16 @@ export class AppComponent implements OnInit {
     //   .then((res) => res.json())
     //   .then((response: ApiResponse<Character>) => (this.characters = response.results));
 
-    this.http
-      .get<ApiResponse<Character>>('https://rickandmortyapi.com/api/character')
-      .subscribe({
-        next: (response) => {
-          this.characters = response.results;
-        },
-        error: (err) => {
-          this.errorService.handle404(err);
-        },
-      });
-    this.http
-      .get<ApiResponse<Location>>('https://rickandmortyapi.com/api/location')
-      .subscribe({
-        next: (response) => {
-          this.locations = response.results;
-        },
-        error: (err) => {
-          this.errorService.handle404(err);
-        },
-      });
+    this.http.get<ApiResponse<Character>>('/character').subscribe({
+      next: (response) => {
+        this.characters = response.results;
+      },
+    });
+    this.http.get<ApiResponse<Location>>('/location').subscribe({
+      next: (response) => {
+        this.locations = response.results;
+      },
+    });
 
     // this.http.post<{}>('url', {
     //   login: 'username',
