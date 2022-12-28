@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, VERSION } from '@angular/core';
+import { ErrorHandlingService } from './services/error-handling.service';
 
 export interface Character {
   name: string;
@@ -22,7 +23,10 @@ export class AppComponent implements OnInit {
   characters: Character[] = [];
   locations: Location[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorHandlingService
+  ) {}
 
   ngOnInit() {
     // fetch('https://rickandmortyapi.com/api/character')
@@ -36,7 +40,7 @@ export class AppComponent implements OnInit {
           this.characters = response.results;
         },
         error: (err) => {
-          alert(err.status);
+          this.errorService.handle404(err);
         },
       });
     this.http
@@ -46,13 +50,13 @@ export class AppComponent implements OnInit {
           this.locations = response.results;
         },
         error: (err) => {
-          alert(err.status);
+          this.errorService.handle404(err);
         },
       });
 
-    this.http.post<{}>('url', {
-      login: 'username',
-      password: 'ashd3123',
-    });
+    // this.http.post<{}>('url', {
+    //   login: 'username',
+    //   password: 'ashd3123',
+    // });
   }
 }
