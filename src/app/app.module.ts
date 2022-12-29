@@ -8,10 +8,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EpisodesListComponent } from './episodes-list/episodes-list.component';
 import { CommonModule } from '@angular/common';
 import { CustomHttpInterceptor } from './http.interceptor';
+import { RxjsBasicComponent } from './rxjs-basic/rxjs-basic.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule, CommonModule],
-  declarations: [AppComponent, HelloComponent, EpisodesListComponent],
+  declarations: [
+    AppComponent,
+    HelloComponent,
+    EpisodesListComponent,
+    RxjsBasicComponent,
+  ],
   bootstrap: [AppComponent],
   providers: [
     {
@@ -23,11 +29,11 @@ import { CustomHttpInterceptor } from './http.interceptor';
       provide: HTTP_INTERCEPTORS,
       useValue: {
         intercept(request: any, next: any) {
-          console.log('dodatkowy interceptor')
+          console.log('dodatkowy interceptor');
           return next.handle(request);
         },
       },
-      multi: true
+      multi: true,
     },
   ],
 })
